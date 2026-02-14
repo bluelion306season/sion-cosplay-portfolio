@@ -284,10 +284,36 @@
 
         .lightbox-content img {
             max-width: 100%;
-            max-height: 90vh;
+            max-height: 75vh;
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 0 60px rgba(255, 45, 117, 0.3);
+        }
+
+        .lightbox-info {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 45, 117, 0.3);
+        }
+
+        .lightbox-character {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .lightbox-series {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.1em;
         }
 
         .lightbox-close {
@@ -478,40 +504,44 @@
             <span class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">&#10094;</span>
             <img src="" alt="Cosplay Photo" id="lightbox-img">
             <span class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">&#10095;</span>
+            <div class="lightbox-info">
+                <p class="lightbox-character" id="lightbox-character"></p>
+                <p class="lightbox-series" id="lightbox-series"></p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Image list
+        // Image list with character info
         const images = [
-            'LINE_ALBUM_コスプレ写真候補_260215_1.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_2.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_3.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_4.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_5.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_6.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_7.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_8.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_9.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_10.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_11.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_12.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_13.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_14.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_15.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_16.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_17.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_18.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_19.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_20.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_21.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_22.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_23.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_24.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_25.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_26.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_27.jpg',
-            'LINE_ALBUM_コスプレ写真候補_260215_28.jpg'
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_1.jpg', character: '東山コベニ', series: 'チェンソーマン' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_2.jpg', character: '禪院真希', series: '呪術廻戦' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_3.jpg', character: '禪院真希', series: '呪術廻戦' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_4.jpg', character: 'マキマ', series: 'チェンソーマン' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_5.jpg', character: '灰谷竜胆', series: '東京リベンジャーズ' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_6.jpg', character: '灰谷竜胆', series: '東京リベンジャーズ' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_7.jpg', character: '矢澤にこ', series: 'ラブライブ！' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_8.jpg', character: '矢澤にこ', series: 'ラブライブ！' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_9.jpg', character: '矢澤にこ', series: 'ラブライブ！' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_10.jpg', character: '当麻紗綾', series: 'SPEC' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_11.jpg', character: '当麻紗綾', series: 'SPEC' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_12.jpg', character: '当麻紗綾', series: 'SPEC' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_13.jpg', character: 'ロベルタ', series: 'BLACK LAGOON' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_14.jpg', character: 'ロベルタ', series: 'BLACK LAGOON' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_15.jpg', character: 'アンバー', series: '原神' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_16.jpg', character: 'アンバー', series: '原神' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_17.jpg', character: '胡桃（フータオ）', series: '原神' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_18.jpg', character: '胡桃（フータオ）', series: '原神' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_19.jpg', character: 'クルエラ', series: 'クルエラ' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_20.jpg', character: 'クルエラ', series: 'クルエラ' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_21.jpg', character: '神原駿河', series: '物語シリーズ' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_22.jpg', character: '神原駿河', series: '物語シリーズ' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_23.jpg', character: '神原駿河', series: '物語シリーズ' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_24.jpg', character: '神原駿河', series: '物語シリーズ' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_25.jpg', character: '羽川翼', series: '物語シリーズ' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_26.jpg', character: '羽川翼', series: '物語シリーズ' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_27.jpg', character: '羽川翼', series: '物語シリーズ' },
+            { file: 'LINE_ALBUM_コスプレ写真候補_260215_28.jpg', character: '羽川翼', series: '物語シリーズ' }
         ];
 
         let currentIndex = 0;
@@ -523,7 +553,7 @@
             images.forEach((img, index) => {
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
-                item.innerHTML = `<img src="${img}" alt="Cosplay Photo ${index + 1}" loading="lazy">`;
+                item.innerHTML = `<img src="${img.file}" alt="${img.character} - ${img.series}" loading="lazy">`;
                 item.onclick = () => openLightbox(index);
                 gallery.appendChild(item);
             });
@@ -534,7 +564,12 @@
             currentIndex = index;
             const lightbox = document.getElementById('lightbox');
             const img = document.getElementById('lightbox-img');
-            img.src = images[index];
+            const character = document.getElementById('lightbox-character');
+            const series = document.getElementById('lightbox-series');
+
+            img.src = images[index].file;
+            character.textContent = images[index].character;
+            series.textContent = images[index].series;
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -549,7 +584,14 @@
             currentIndex += direction;
             if (currentIndex < 0) currentIndex = images.length - 1;
             if (currentIndex >= images.length) currentIndex = 0;
-            document.getElementById('lightbox-img').src = images[currentIndex];
+
+            const img = document.getElementById('lightbox-img');
+            const character = document.getElementById('lightbox-character');
+            const series = document.getElementById('lightbox-series');
+
+            img.src = images[currentIndex].file;
+            character.textContent = images[currentIndex].character;
+            series.textContent = images[currentIndex].series;
         }
 
         // Keyboard navigation
