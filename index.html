@@ -421,6 +421,51 @@
             fill: #fff;
         }
 
+        /* Team Section */
+        .team-section {
+            padding: 4rem 2rem;
+            background: var(--darker);
+            text-align: center;
+        }
+
+        .team-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+        }
+
+        .team-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+        }
+
+        .team-image {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 45, 117, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .team-image:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 40px rgba(255, 45, 117, 0.3);
+        }
+
+        .team-image img {
+            width: 100%;
+            display: block;
+        }
+
         /* Glitch effect on hover for title */
         .glitch {
             position: relative;
@@ -536,6 +581,15 @@
         </div>
         <div class="gallery" id="gallery">
             <!-- Images will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <p class="team-label">Member of</p>
+        <p class="team-name">サバトエンターテイメント</p>
+        <div class="team-image">
+            <img src="sabbatall2.jpg" alt="サバトエンターテイメント">
         </div>
     </section>
 
