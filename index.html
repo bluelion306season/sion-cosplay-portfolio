@@ -262,6 +262,22 @@
             transform: scale(1.05);
         }
 
+        .photo-number {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--primary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            z-index: 3;
+            letter-spacing: 0.05em;
+        }
+
         /* Lightbox */
         .lightbox {
             position: fixed;
@@ -322,6 +338,14 @@
         .lightbox-series {
             font-size: 1rem;
             color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.1em;
+        }
+
+        .lightbox-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
             letter-spacing: 0.1em;
         }
 
@@ -633,6 +657,7 @@
             <img src="" alt="Cosplay Photo" id="lightbox-img">
             <span class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">&#10095;</span>
             <div class="lightbox-info">
+                <p class="lightbox-number" id="lightbox-number"></p>
                 <p class="lightbox-character" id="lightbox-character"></p>
                 <p class="lightbox-series" id="lightbox-series"></p>
             </div>
@@ -681,7 +706,10 @@
             images.forEach((img, index) => {
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
-                item.innerHTML = `<img src="${img.file}" alt="${img.character} - ${img.series}" loading="lazy">`;
+                item.innerHTML = `
+                    <span class="photo-number">NO.${index + 1}</span>
+                    <img src="${img.file}" alt="${img.character} - ${img.series}" loading="lazy">
+                `;
                 item.onclick = () => openLightbox(index);
                 gallery.appendChild(item);
             });
@@ -692,10 +720,12 @@
             currentIndex = index;
             const lightbox = document.getElementById('lightbox');
             const img = document.getElementById('lightbox-img');
+            const number = document.getElementById('lightbox-number');
             const character = document.getElementById('lightbox-character');
             const series = document.getElementById('lightbox-series');
 
             img.src = images[index].file;
+            number.textContent = `NO.${index + 1}`;
             character.textContent = images[index].character;
             series.textContent = images[index].series;
             lightbox.classList.add('active');
@@ -714,10 +744,12 @@
             if (currentIndex >= images.length) currentIndex = 0;
 
             const img = document.getElementById('lightbox-img');
+            const number = document.getElementById('lightbox-number');
             const character = document.getElementById('lightbox-character');
             const series = document.getElementById('lightbox-series');
 
             img.src = images[currentIndex].file;
+            number.textContent = `NO.${currentIndex + 1}`;
             character.textContent = images[currentIndex].character;
             series.textContent = images[currentIndex].series;
         }
