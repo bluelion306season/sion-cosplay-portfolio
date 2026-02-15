@@ -384,6 +384,43 @@
             font-size: 0.9rem;
         }
 
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 45, 117, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 45, 117, 0.4);
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+            transition: fill 0.3s ease;
+        }
+
+        .social-link:hover svg {
+            fill: #fff;
+        }
+
         /* Glitch effect on hover for title */
         .glitch {
             position: relative;
@@ -494,6 +531,13 @@
     <!-- Footer -->
     <footer>
         <p class="footer-name">夜彬紫苑 / SION</p>
+        <div class="social-links">
+            <a href="https://x.com/yoakira_shion" target="_blank" rel="noopener noreferrer" class="social-link" title="X (Twitter)">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+        </div>
         <p class="footer-text">All photos are original works. Unauthorized reproduction is prohibited.</p>
     </footer>
 
