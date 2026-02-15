@@ -471,6 +471,7 @@
         .stats {
             display: flex;
             justify-content: center;
+            align-items: stretch;
             gap: 4rem;
             margin-top: 3rem;
             flex-wrap: wrap;
@@ -478,6 +479,10 @@
 
         .stat-item {
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-width: 120px;
         }
 
         .stat-number {
@@ -485,6 +490,11 @@
             font-size: 3rem;
             font-weight: 900;
             color: var(--primary);
+            line-height: 1;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .stat-label {
@@ -492,6 +502,7 @@
             color: rgba(255, 255, 255, 0.6);
             text-transform: uppercase;
             letter-spacing: 0.2em;
+            margin-top: 0.5rem;
         }
     </style>
 </head>
